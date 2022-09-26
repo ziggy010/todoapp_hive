@@ -15,11 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   final _controller = TextEditingController();
 
-  List<ToDoModel> todoList = [
-    ToDoModel(todoText: 'To exercise', taskStatus: false),
-    ToDoModel(todoText: 'To drink water', taskStatus: false),
-    ToDoModel(todoText: 'To bath', taskStatus: false),
-  ];
+  List<ToDoModel> todoList = [];
 
   changeStatus(int index, bool? value) {
     setState(() {
@@ -76,18 +72,40 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       backgroundColor: Colors.deepPurple.shade400,
-      body: ListView.builder(
-        itemCount: todoList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ToDoTile(
-            todoText: todoList[index].todoText,
-            taskCompleted: todoList[index].taskStatus,
-            onChanged: (Value) {
-              changeStatus(index, Value);
-            },
-          );
-        },
-      ),
+      body: todoList.length != 0
+          ? ListView.builder(
+              itemCount: todoList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ToDoTile(
+                  todoText: todoList[index].todoText,
+                  taskCompleted: todoList[index].taskStatus,
+                  onChanged: (Value) {
+                    changeStatus(index, Value);
+                  },
+                  onDelete: () {
+                    setState(() {
+                      todoList.removeAt(index);
+                    });
+                  },
+                );
+              },
+            )
+          : Center(
+              child: Padding(
+                padding: EdgeInsets.all(
+                  15.0.sm,
+                ),
+                child: Text(
+                  'Please add your to do list to show here!',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontFamily: 'poppins',
+                    fontSize: 25.sp,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
     );
   }
 }

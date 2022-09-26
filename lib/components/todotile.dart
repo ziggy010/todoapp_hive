@@ -5,11 +5,13 @@ class ToDoTile extends StatelessWidget {
   final String todoText;
   final bool taskCompleted;
   Function(bool?)? onChanged;
+  VoidCallback onDelete;
 
   ToDoTile({
     required this.todoText,
     required this.taskCompleted,
     required this.onChanged,
+    required this.onDelete,
   });
 
   @override
@@ -31,22 +33,38 @@ class ToDoTile extends StatelessWidget {
           ),
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Checkbox(
-              value: taskCompleted,
-              onChanged: onChanged,
+            Row(
+              children: [
+                Checkbox(
+                  value: taskCompleted,
+                  onChanged: onChanged,
+                ),
+                Text(
+                  todoText,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'poppins',
+                    fontSize: 15.sp,
+                    decoration: taskCompleted
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
+                    decorationThickness: 2.0,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              todoText,
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'poppins',
-                fontSize: 15.sp,
-                decoration: taskCompleted
-                    ? TextDecoration.lineThrough
-                    : TextDecoration.none,
-                decorationThickness: 2.0,
-              ),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: onDelete,
+                  child: Icon(
+                    (Icons.delete),
+                    color: Color.fromARGB(255, 139, 31, 23),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
