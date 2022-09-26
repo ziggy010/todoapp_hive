@@ -4,9 +4,11 @@ import 'package:todoapp_hive/components/myButtons.dart';
 
 class AlertDialogComponents extends StatelessWidget {
   final controller;
+  VoidCallback onSave;
 
   AlertDialogComponents({
     required this.controller,
+    required this.onSave,
   });
 
   @override
@@ -45,7 +47,9 @@ class AlertDialogComponents extends StatelessWidget {
               children: [
                 MyButtons(
                   buttonText: 'Cancel',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
                   buttonColor: Colors.red,
                 ),
                 SizedBox(
@@ -53,7 +57,7 @@ class AlertDialogComponents extends StatelessWidget {
                 ),
                 MyButtons(
                   buttonText: 'Save',
-                  onTap: () {},
+                  onTap: onSave,
                   buttonColor: Colors.green,
                 ),
               ],

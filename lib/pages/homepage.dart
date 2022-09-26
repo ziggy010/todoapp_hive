@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todoapp_hive/components/AlertDialog.dart';
+import 'package:todoapp_hive/model/ToDoModel.dart';
 
 import '../components/todotile.dart';
 
@@ -14,14 +15,15 @@ class _HomePageState extends State<HomePage> {
 
   final _controller = TextEditingController();
 
-  List todoList = [
-    ['To exercise', false],
-    ['To drink water', false],
+  List<ToDoModel> todoList = [
+    ToDoModel(todoText: 'To exercise', taskStatus: false),
+    ToDoModel(todoText: 'To drink water', taskStatus: false),
+    ToDoModel(todoText: 'To bath', taskStatus: false),
   ];
 
   changeStatus(int index, bool? value) {
     setState(() {
-      todoList[index][1] = !todoList[index][1];
+      todoList[index].taskStatus = !todoList[index].taskStatus;
     });
   }
 
@@ -31,6 +33,18 @@ class _HomePageState extends State<HomePage> {
       builder: ((context) {
         return AlertDialogComponents(
           controller: _controller,
+          onSave: () {
+            setState(() {
+              todoList.add(
+                ToDoModel(
+                  todoText: _controller.text,
+                  taskStatus: false,
+                ),
+              );
+            });
+
+            Navigator.of(context).pop();
+          },
         );
       }),
     );
@@ -65,8 +79,8 @@ class _HomePageState extends State<HomePage> {
         itemCount: todoList.length,
         itemBuilder: (BuildContext context, int index) {
           return ToDoTile(
-            todoText: todoList[index][0],
-            taskCompleted: todoList[index][1],
+            todoText: todoList[index].todoText,
+            taskCompleted: todoList[index].taskStatus,
             onChanged: (Value) {
               changeStatus(index, Value);
             },
