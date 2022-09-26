@@ -3,7 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todoapp_hive/components/myButtons.dart';
 
 class AlertDialogComponents extends StatelessWidget {
-  const AlertDialogComponents({Key? key}) : super(key: key);
+  final controller;
+
+  AlertDialogComponents({
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +21,14 @@ class AlertDialogComponents extends StatelessWidget {
         color: Colors.deepPurple,
         child: Column(
           children: [
-            const TextField(
-              style: TextStyle(
+            TextField(
+              controller: controller,
+              style: const TextStyle(
                 color: Colors.white,
                 fontFamily: 'poppins',
                 decoration: TextDecoration.none,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Add task',
                 hintStyle: TextStyle(

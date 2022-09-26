@@ -10,6 +10,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //text edition controller
+
+  final _controller = TextEditingController();
+
   List todoList = [
     ['To exercise', false],
     ['To drink water', false],
@@ -25,7 +29,9 @@ class _HomePageState extends State<HomePage> {
     showDialog(
       context: context,
       builder: ((context) {
-        return AlertDialogComponents();
+        return AlertDialogComponents(
+          controller: _controller,
+        );
       }),
     );
   }
