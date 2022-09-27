@@ -52,6 +52,13 @@ class ToDoTile extends StatelessWidget {
               Checkbox(
                 value: taskCompleted,
                 onChanged: onChanged,
+                fillColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.disabled)) {
+                    return Colors.green.withOpacity(.32);
+                  }
+                  return Colors.green;
+                }),
               ),
               Text(
                 todoText,
