@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                   onChanged: (Value) {
                     changeStatus(index, Value);
                   },
-                  onDelete: () {
+                  onDelete: (context) {
                     setState(() {
                       todoList.removeAt(index);
                     });

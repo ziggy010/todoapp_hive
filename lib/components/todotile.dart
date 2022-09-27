@@ -6,7 +6,7 @@ class ToDoTile extends StatelessWidget {
   final String todoText;
   final bool taskCompleted;
   Function(bool?)? onChanged;
-  VoidCallback onDelete;
+  Function(BuildContext)? onDelete;
 
   ToDoTile(
       {required this.todoText,
@@ -23,13 +23,17 @@ class ToDoTile extends StatelessWidget {
       ),
       child: Slidable(
         endActionPane: ActionPane(
+          motion: StretchMotion(),
           children: [
             SlidableAction(
-              onPressed: (BuildContext) {},
+              onPressed: onDelete,
               icon: Icons.delete,
+              backgroundColor: Colors.red,
+              borderRadius: BorderRadius.circular(
+                12.r,
+              ),
             ),
           ],
-          motion: StretchMotion(),
         ),
         child: Container(
           width: double.infinity,
