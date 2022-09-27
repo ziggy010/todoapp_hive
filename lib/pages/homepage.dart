@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todoapp_hive/components/AlertDialog.dart';
 import 'package:todoapp_hive/model/ToDoModel.dart';
 
@@ -11,6 +12,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //Hive box reference;
+
+  final _myBox = Hive.openBox('myBox');
+
   //text edition controller
 
   final _controller = TextEditingController();
