@@ -10,7 +10,7 @@ void main() async {
 
   //Open box for hive
 
-  var box = Hive.openBox('myBox');
+  var box = await Hive.openBox('myBox');
 
   runApp(const MyApp());
 }

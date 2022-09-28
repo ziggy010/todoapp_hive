@@ -13,6 +13,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    //creating this method if the app is opened for the first time.
+    if (_myBox.get('TODOLIST') == null) {
+      db.initializeData();
+    } else {
+      db.loadData();
+    }
+    super.initState();
+  }
   //Hive box reference;
 
   final _myBox = Hive.box('myBox');
@@ -29,6 +41,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       db.todoList[index].taskStatus = !db.todoList[index].taskStatus;
     });
+    db.updateDatabase();
   }
 
   void addTask() {
@@ -49,6 +62,7 @@ class _HomePageState extends State<HomePage> {
 
             Navigator.of(context).pop();
             _controller.clear();
+            db.updateDatabase();
           },
         );
       }),
@@ -94,6 +108,7 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       db.todoList.removeAt(index);
                     });
+                    db.updateDatabase();
                   },
                 );
               },
