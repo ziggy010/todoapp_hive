@@ -5,6 +5,8 @@ import '../model/ToDoModel.dart';
 class ToDoDatabase {
   List<ToDoModel> todoList = [];
 
+  List commitList = [];
+
   //referencing hive database;
   final _myBox = Hive.box('myBox');
 
